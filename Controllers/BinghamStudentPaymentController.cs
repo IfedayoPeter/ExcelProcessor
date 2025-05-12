@@ -38,7 +38,7 @@ namespace ValueJetImport.Controllers
 
             do
             {
-                // Build query for the current page
+                 // Build query for the current page
                 var queryParams = new List<string>
         {
             $"limit={limit}",
@@ -88,7 +88,7 @@ namespace ValueJetImport.Controllers
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Student Payments");
 
-            var headers = new List<string> { "Payment Code", "Student Code", "Total Amount", "Payment Date", "Description", "Bank Code", "Academic Session", "Verified" };
+            var headers = new List<string> { "transactionReference", "transactionCode", "studentCode", "totalAmount", "paymentDate", "description", "bankCode", "academicSession", "verified" };
             for (int i = 0; i < headers.Count; i++)
             {
                 worksheet.Cell(1, i + 1).Value = headers[i];
@@ -99,13 +99,24 @@ namespace ValueJetImport.Controllers
             foreach (var payment in allStudentPayments)
             {
                 worksheet.Cell(row, 1).Value = payment.Payment_Code;
-                worksheet.Cell(row, 2).Value = payment.Student_Code;
-                worksheet.Cell(row, 3).Value = payment.Total_Amount.ToString() ?? "N/A";
-                worksheet.Cell(row, 4).Value = payment.Payment_Date;
-                worksheet.Cell(row, 5).Value = payment.Payment_Description;
-                worksheet.Cell(row, 6).Value = payment.Bank_Code?.ToString() ?? "N/A";
-                worksheet.Cell(row, 7).Value = payment.Academic_Session;
-                worksheet.Cell(row, 8).Value = payment.Is_Payment_Verified ? "Yes" : "No";
+                worksheet.Cell(row, 2).Value = payment.Payment_Code;
+                worksheet.Cell(row, 3).Value = payment.Student_Code;
+                worksheet.Cell(row, 4).Value = payment.Total_Amount.ToString() ?? "N/A";
+                // Convert Payment_Date string to DateTime and assign it as date format
+                if (DateTime.TryParse(payment.Payment_Date, out var parsedDate))
+                {
+                    worksheet.Cell(row, 5).Value = parsedDate;
+                    worksheet.Cell(row, 5).Style.DateFormat.Format = "yyyy-mm-dd"; // Optional: Set desired date format
+                }
+                else
+                {
+                    worksheet.Cell(row, 5).Value = "Invalid Date";
+                }
+                //worksheet.Cell(row, 5).Value = payment.Payment_Date;
+                worksheet.Cell(row, 6).Value = payment.Payment_Description;
+                worksheet.Cell(row, 7).Value = payment.Bank_Code?.ToString();
+                worksheet.Cell(row, 8).Value = payment.Academic_Session;
+                worksheet.Cell(row, 9).Value = payment.Is_Payment_Verified ? "Yes" : "No";
                 row++;
             }
 

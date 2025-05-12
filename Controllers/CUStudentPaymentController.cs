@@ -10,7 +10,7 @@ namespace Processor.Controllers
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private const string BaseUrl = "https://studentaccount.covenantuniversity.edu.ng/api/paymentroute.php";
-        private const string ApiKey = "HnKcqzjS10ZqAkfPl7IkFMf6zMFOh3iiwgjlQAgT7a3caa2c";
+        private const string ApiKey = "e3f8a1c9b75a4d10e3d2f9b1c8e07a69f25c7d8a3e5b4c8f6d1e2f3c4b5a6d7e";
 
         public CUStudentPaymentController(IHttpClientFactory httpClientFactory)
         {
@@ -48,7 +48,7 @@ namespace Processor.Controllers
             var responseContent = await response.Content.ReadAsStringAsync();
 
             // Debugging - Log response
-            Console.WriteLine("Raw API Response: " + responseContent);
+            //Console.WriteLine("Raw API Response: " + responseContent);
             if (string.IsNullOrWhiteSpace(responseContent))
             {
                 return BadRequest("API returned an empty response.");
@@ -87,7 +87,7 @@ namespace Processor.Controllers
                 {
                     worksheet.Cell(row, 1).Value = payment.StudentCode;
                     worksheet.Cell(row, 2).Value = payment.TotalAmount;
-                    worksheet.Cell(row, 3).Value = payment.PaymentReference ?? "N/A";
+                    worksheet.Cell(row, 3).Value = payment.PaymentReference;
                     worksheet.Cell(row, 4).Value = payment.PaymentCode;
                     worksheet.Cell(row, 5).Value = payment.PaymentDate;
                     worksheet.Cell(row, 6).Value = payment.BankId;
@@ -156,7 +156,7 @@ namespace Processor.Controllers
         public class StudentPayment
         {
             public string StudentCode { get; set; }
-            public int TotalAmount { get; set; }
+            public decimal TotalAmount { get; set; }
             public string? PaymentReference { get; set; }
             public int PaymentCode { get; set; }
             public string PaymentDate { get; set; }

@@ -7,11 +7,11 @@ namespace ValueJetImport.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LookupController : ControllerBase
+    public class BinghamDataLookupController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public LookupController(IHttpClientFactory httpClientFactory)
+        public BinghamDataLookupController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }

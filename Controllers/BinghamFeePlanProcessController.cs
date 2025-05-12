@@ -7,7 +7,7 @@ namespace FeePlanApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BinghamFeePlanController : ControllerBase
+    public class BinghamFeePlanProcessController : ControllerBase
     {
         [HttpPost("process")]
         public IActionResult ProcessFeePlan([FromBody] List<BinghamFeePlan> feePlans)

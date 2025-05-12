@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ValueJetImport.Helpers;
 using ValueJetImport.Model;
 
-namespace ValueJetImport.Controllers
+namespace Processor.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeesController : ControllerBase
+    public class FeesProcessController : ControllerBase
     {
         [HttpPost("process")]
         public IActionResult ProcessFees([FromBody] List<ExcelFeeInput> feeInputs)

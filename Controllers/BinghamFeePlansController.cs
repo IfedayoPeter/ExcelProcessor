@@ -1,12 +1,9 @@
 ﻿using ClosedXML.Excel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
-using System.Linq;
-using System.Collections.Generic;
-using static ValueJetImport.Controllers.StudentController;
+using static Processor.Controllers.BinghamStudentController;
 
-namespace ValueJetImport.Controllers
+namespace Processor.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -107,7 +104,7 @@ namespace ValueJetImport.Controllers
 
             var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse<FeePlan>>();
 
-             var data = apiResponse?.Data?.Data;
+            var data = apiResponse?.Data?.Data;
 
             if (data is not null)
             {
@@ -248,7 +245,7 @@ namespace ValueJetImport.Controllers
 
         public class FeePlanResponse
         {
-            public List<FeePlan> Data { get; set; } 
+            public List<FeePlan> Data { get; set; }
             public int current_page { get; set; }
             public int last_page { get; set; }
             public int total { get; set; }
@@ -258,7 +255,7 @@ namespace ValueJetImport.Controllers
         {
             public bool success { get; set; }
             public int code { get; set; }
-            public Data1 Data { get; set; } 
+            public Data1 Data { get; set; }
         }
         public class Data1
         {

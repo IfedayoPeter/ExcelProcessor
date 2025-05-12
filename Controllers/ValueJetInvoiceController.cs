@@ -6,7 +6,7 @@ using ValueJetImport.Model;
 
 [ApiController]
 [Route("api/process")]
-public class InvoiceController : ControllerBase
+public class ValueJetInvoiceController : ControllerBase
 {
     [HttpPost("transactions")]
     public IActionResult ProcessInvoice([FromBody] List<KiuTransaction> inputData)

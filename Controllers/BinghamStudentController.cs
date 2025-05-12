@@ -1,20 +1,17 @@
 ﻿using ClosedXML.Excel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
-using System.Linq;
-using System.Collections.Generic;
 
-namespace ValueJetImport.Controllers
+namespace Processor.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class BinghamStudentController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private static readonly string[] ValidTenants = { "undergraduate", "postgraduate" };
 
-        public StudentController(IHttpClientFactory httpClientFactory)
+        public BinghamStudentController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
